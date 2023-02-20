@@ -1,9 +1,9 @@
 const bcryptjs = require('bcryptjs');
 
+const Usuario = require('../models/usuario');
 
 
 const {response ,request} = require('express');//Solamente para que aparezcan los datos de express
-const Usuario = require('../models/usuario');
 
 
 const usuariosGet = async(req = request, res = response) => {
@@ -75,14 +75,11 @@ const usuariosDelete = async(req, res) => {
 
     const {id} = req.params;
 
-    //fisicamente lo borramos
-    // const usuario = await Usuario.findByIdAndDelete(id);
-
     const usuario = await Usuario.findByIdAndUpdate(id, {estado:false })
 
+    const usuarioAutenticado = req.usuario;
 
-
-    res.json(usuario);
+    res.json({usuario, usuarioAutenticado});
 }
 
 module.exports = {
