@@ -22,7 +22,7 @@ const router = Router();
 router.get('/', usuariosGet);
 
 router.post('/', [//Validacion para correo
-        check('nombre', 'El nombre es obliigatorio').not().isEmpty(),
+        check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         check('password', 'La contraseña es obliigatoria y debe de contener mas de 6 letras').isLength({min: 6}),
         check('correo', 'El correo no es válido').isEmail(),
         check('correo').custom((correo) => existeEmail(correo)),
